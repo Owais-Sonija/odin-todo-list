@@ -25,10 +25,30 @@
             <div
               class="tabs pl-12 col-span-2 h-full flex gap-4 flex-col justify-center bg-slate-600"
             >
-              <p class="tab text-xl font-medium text-slate-300">All</p>
-              <p class="tab text-xl font-medium text-slate-300">Groceries</p>
-              <p class="tab text-xl font-medium text-slate-300">College</p>
-              <p class="tab text-xl font-medium text-slate-300">Payments</p>
+              <p
+                class="tab cursor-pointer text-xl font-medium text-slate-300"
+                data-category="all"
+              >
+                All
+              </p>
+              <p
+                class="tab cursor-pointer text-xl font-medium text-slate-300"
+                data-category="groceries"
+              >
+                Groceries
+              </p>
+              <p
+                class="tab cursor-pointer text-xl font-medium text-slate-300"
+                data-category="college"
+              >
+                College
+              </p>
+              <p
+                class="tab cursor-pointer text-xl font-medium text-slate-300"
+                data-category="payment"
+              >
+                Payment
+              </p>
             </div>
             <div
               class="content py-6 px-12 flex flex-col gap-6 col-span-5 h-full"
@@ -36,17 +56,19 @@
               <div class="flex flex-col gap-5">
                 <p for="todo" class="text-xl font-semibold">Tasks</p>
                 <form class="flex items-center gap-4">
-                  <div class="flex flex-col gap-2 w-4/6">
+                  <div class="flex flex-col gap-2 w-3/6">
                     <input
                       type="text"
                       name="todo"
                       id="todo"
+                      required
                       class="py-1 px-2 border-none rounded bg-[#F3F3F3]"
-                      placeholder="Add a new task insdie 'All' category"
+                      placeholder="Add a new task..."
                     />
                   </div>
                   <div class="w-2/6">
                     <select
+                    required
                       name="category"
                       id="category"
                       class="py-1 px-2 border-none rounded bg-[#F3F3F3] w-full"
@@ -56,45 +78,13 @@
                       </option>
                       <option value="groceries">Groceries</option>
                       <option value="college">College</option>
-                      <option value="payments">Payments</option>
+                      <option value="payment">Payment</option>
                     </select>
                   </div>
+                  <button type="submit" class="w-1/6 py-1 px-4 bg-blue-500 rounded text-blue-50 hover:bg-blue-600">Add Todo</button>
                 </form>
               </div>
-              <div class="tasks flex flex-col gap-4">
-                <div class="task flex items-center justify-between">
-                  <div class="flex items-center gap-4">
-                    <input
-                      type="checkbox"
-                      name="complete_check"
-                      id="complete_check"
-                      class="scale-150"
-                    />
-                    <p class="todo_text text-lg">Get a new helmet</p>
-                    <span class="category_badge py-1 px-6 rounded-full bg-red-500 text-sm text-red-50 font-medium  ">College</span>
-                  </div>
-                  <div class="flex items-center gap-4">
-                    <span class="cursor-pointer"><i class="fa-regular fa-pen-to-square"></i></span>
-                    <span class="cursor-pointer"><i class="fa-regular fa-trash-can"></i></span>
-                  </div>
-                </div>
-                
-                <div class="task flex items-center justify-between">
-                    <div class="flex items-center gap-4">
-                      <input
-                        type="checkbox"
-                        name="complete_check"
-                        id="complete_check"
-                        class="scale-150"
-                      />
-                      <p class="todo_text text-lg">Get a new helmet</p>
-                      <span class="category_badge py-1 px-6 rounded-full bg-red-500 text-sm text-red-50 font-medium  ">College</span>
-                    </div>
-                    <div class="flex items-center gap-4">
-                      <span class="cursor-pointer"><i class="fa-regular fa-pen-to-square"></i></span>
-                      <span class="cursor-pointer"><i class="fa-regular fa-trash-can"></i></span>
-                    </div>
-                  </div>
+              <div class="tasks_body flex flex-col gap-4">
               </div>
             </div>
           </div>
