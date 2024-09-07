@@ -1,22 +1,6 @@
 // Getting the data
 
-const tasksArray = [
-    {
-        text: "Get a new helmet",
-        category: "college",
-        isCompleted: false
-    },
-    {
-        text: "Get a book",
-        category: "college",
-        isCompleted: true
-    },
-    {
-        text: "Get a Bhindi",
-        category: "groceries",
-        isCompleted: false
-    },
-]
+let tasks = localStorage.getItem("tasks") ? JSON.parse(localStorage.getItem("tasks")) : [];
 
 
 let categorySelected = "all";
@@ -24,20 +8,22 @@ let categorySelected = "all";
 const tabs = document.querySelectorAll(".tab");
 const taskBody = document.querySelector(".tasks_body");
 const form = document.querySelector("form");
-console.log(taskBody);
 
 
 
 // Creating Functions
 
 function displayTasks(category) {
-    // Clearing HTML 
-    taskBody.innerHTML = "";
-    let html;
-    tasksArray.map((task, index) => {
-        if (task.category == category) {
+  // Clearing HTML 
+  taskBody.innerHTML = "";
+  let html;
+  if (!tasks) {
+    return
+  }
+  tasks.map((task, index) => {
+    if (task.category == category) {
 
-            html = `
+      html = `
             <div class="task flex items-center justify-between">
                       <div class="flex items-center gap-4">
                         <input
@@ -63,11 +49,11 @@ function displayTasks(category) {
                       </div>
                     </div>
             `;
-    
-    
-            taskBody.innerHTML += html;
-        }  else if (category == "all") {
-            html = `
+
+
+      taskBody.innerHTML += html;
+    } else if (category == "all") {
+      html = `
             <div class="task flex items-center justify-between">
                       <div class="flex items-center gap-4">
                         <input
@@ -93,81 +79,87 @@ function displayTasks(category) {
                       </div>
                     </div>
             `;
-    
-    
-            taskBody.innerHTML += html;
-        }
-    });
+
+
+      taskBody.innerHTML += html;
+    }
+  });
 
 
 
-    toggleCompleted();
+  toggleCompleted();
 }
 
 function toggleCategory(ele) {
-      categorySelected = ele.target.dataset.category;
-    displayTasks(categorySelected);
-    
+  categorySelected = ele.target.dataset.category;
+  displayTasks(categorySelected);
+
 }
 
+function updateLocalStorage() {
+  window.localStorage.setItem("tasks", JSON.stringify(tasks))
+  console.log(JSON.parse(window.localStorage.getItem("tasks")));
+
+}
+
+
 function addTask() {
-    let todoInput = document.getElementById("todo");
-    let categoryInput = document.getElementById("category");
-    tasksArray.push({
-        text: todoInput.value,
-        category: categoryInput.value,
-        isCompleted: false
-    })
-    // categorySelected = categoryInputValue;
-    console.log(categorySelected);
-    todoInput.value = "";
-    categoryInput.value = ""
-    displayTasks(categorySelected);
+  let todoInput = document.getElementById("todo");
+  let categoryInput = document.getElementById("category");
+  tasks.push({
+    text: todoInput.value,
+    category: categoryInput.value,
+    isCompleted: false
+  })
+  todoInput.value = "";
+  categoryInput.value = ""
+  updateLocalStorage()
+  displayTasks(categorySelected);
 
 }
 
 
 function editTask(id) {
-    let inputEle = document.getElementById("todo")
-    let selectEle = document.getElementById("category");
-    inputEle.value = tasksArray[id].text;
-    selectEle.value = tasksArray[id].category;
-    
-    deleteTask(id);
+  let inputEle = document.getElementById("todo")
+  let selectEle = document.getElementById("category");
+  inputEle.value = tasks[id].text;
+  selectEle.value = tasks[id].category;
+updateLocalStorage()
+  deleteTask(id);
 
-    
+
 }
 
 function toggleCompleted() {
 
-    const checkBoxes = document.querySelectorAll("input[name='complete_check']");
-    checkBoxes.forEach((checkBox) => checkBox.addEventListener("change", () => {
-        const taskIndex = parseInt(checkBox.dataset.index);
-        tasksArray[taskIndex].isCompleted = checkBox.checked;
-        
-        displayTasks(categorySelected)
+  const checkBoxes = document.querySelectorAll("input[name='complete_check']");
+  checkBoxes.forEach((checkBox) => checkBox.addEventListener("change", () => {
+    const taskIndex = parseInt(checkBox.dataset.index);
+    tasks[taskIndex].isCompleted = checkBox.checked;
+updateLocalStorage()
+    displayTasks(categorySelected)
 
 
-    }
-    ))
+  }
+  ))
 }
 
 function deleteTask(index) {
 
-    tasksArray.splice(index, 1);
-    displayTasks(categorySelected);
+  tasks.splice(index, 1);
+  updateLocalStorage()
+  displayTasks(categorySelected);
 }
 
 // Calling Functions
 
 form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    addTask();
+  e.preventDefault();
+  addTask();
 
 })
 
-tabs.forEach((tab)=> tab.addEventListener("click", toggleCategory))
+tabs.forEach((tab) => tab.addEventListener("click", toggleCategory))
 
-console.log(categorySelected);
 
 displayTasks(categorySelected);
