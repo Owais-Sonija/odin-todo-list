@@ -1,12 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo List App</title>
-</head>
-<body>
-    <h1>Todo List App</h1>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <main>
+      <div
+        class="page flex flex-col items-center justify-center min-h-screen bg-red-500"
+      >
+        <div class="container h-[80vh] w-[80vw] shadow-lg bg-white">
+          <div
+            class="grid_container grid grid-cols-7 grid-rows-1 w-full h-full"
+          >
+            <div
+              class="tabs pl-12 col-span-2 h-full flex gap-4 flex-col justify-center bg-slate-600"
+            >
+              <p class="tab text-xl font-medium text-slate-300">All</p>
+              <p class="tab text-xl font-medium text-slate-300">Groceries</p>
+              <p class="tab text-xl font-medium text-slate-300">College</p>
+              <p class="tab text-xl font-medium text-slate-300">Payments</p>
+            </div>
+            <div
+              class="content py-6 px-12 flex flex-col gap-6 col-span-5 h-full"
+            >
+              <div class="flex flex-col gap-5">
+                <p for="todo" class="text-xl font-semibold">Tasks</p>
+                <form class="flex items-center gap-4">
+                  <div class="flex flex-col gap-2 w-4/6">
+                    <input
+                      type="text"
+                      name="todo"
+                      id="todo"
+                      class="py-1 px-2 border-none rounded bg-[#F3F3F3]"
+                      placeholder="Add a new task insdie 'All' category"
+                    />
+                  </div>
+                  <div class="w-2/6">
+                    <select
+                      name="category"
+                      id="category"
+                      class="py-1 px-2 border-none rounded bg-[#F3F3F3] w-full"
+                    >
+                      <option value="" disabled selected>
+                        Select your category
+                      </option>
+                      <option value="groceries">Groceries</option>
+                      <option value="college">College</option>
+                      <option value="payments">Payments</option>
+                    </select>
+                  </div>
+                </form>
+              </div>
+              <div class="tasks flex flex-col gap-4">
+                <div class="task flex items-center justify-between">
+                  <div class="flex items-center gap-4">
+                    <input
+                      type="checkbox"
+                      name="complete_check"
+                      id="complete_check"
+                      class="scale-150"
+                    />
+                    <p class="todo_text text-lg">Get a new helmet</p>
+                    <span class="category_badge py-1 px-6 rounded-full bg-red-500 text-sm text-red-50 font-medium  ">College</span>
+                  </div>
+                  <div class="flex items-center gap-4">
+                    <span class="cursor-pointer"><i class="fa-regular fa-pen-to-square"></i></span>
+                    <span class="cursor-pointer"><i class="fa-regular fa-trash-can"></i></span>
+                  </div>
+                </div>
+                
+                <div class="task flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                      <input
+                        type="checkbox"
+                        name="complete_check"
+                        id="complete_check"
+                        class="scale-150"
+                      />
+                      <p class="todo_text text-lg">Get a new helmet</p>
+                      <span class="category_badge py-1 px-6 rounded-full bg-red-500 text-sm text-red-50 font-medium  ">College</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                      <span class="cursor-pointer"><i class="fa-regular fa-pen-to-square"></i></span>
+                      <span class="cursor-pointer"><i class="fa-regular fa-trash-can"></i></span>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
